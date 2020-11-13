@@ -1,13 +1,10 @@
-
-//Usecase1:
+//Usecase1,Usecase2:
 var prompt = require('prompt-sync')();
-
 let nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
 let addressRegex = RegExp('[A-z]{4,}$');
 let zipRegex = RegExp('[0-9]{3}[0-9]{3}');
 let phoneRegex = RegExp('[0-9]{2}[789]{1}[0-9]{2,10}');
 let emailRegex = RegExp('^(?=.*[A-Z])(?=.*[0-9])(?=.*[$#@!%_&])[A-Za-z0-9$#@!%_&]{8,}$');
-
 class Contact{
     constructor(...params){
         this.firstName = params[0];
@@ -18,8 +15,7 @@ class Contact{
         this.zip = params[5];
         this.phone = params[6];
         this.email = params[7];
-    } 
-
+    }
     get firstName(){return this._firstName}
     set firstName(firstName){
         if(nameRegex.test(firstName)){
@@ -83,13 +79,12 @@ class Contact{
         }else{
             throw "Invalid Email";
         }
-    }  
+    } 
     toString(){
         return "FirstName: "+this.firstName+" LastName: "+this.lastName + " Address: "+this.address + " City: "+this.city + " State: "+this.state 
                 + " Zip: "+this.zip + " Phone: "+this.phone + " Email: "+this.email;
     }
 }
-
 function createContact(){
     let fName = prompt("Enter first name: ");
     let lName = prompt("Enter last name: ");
@@ -99,13 +94,14 @@ function createContact(){
     let zip = prompt("Enter the zip: ");
     let phone = prompt("Enter the phone: ");
     let email = prompt("Enter the email: ");
-    let contact = new Contact(fName,lName,address,city,state,zip,phone,email);
+    let contact = new Contact(fName,lName,address,city,state,zip,phone);
     return contact;
 }
 //Usecase3:
 let addressBookArr = new Array();
 function addContact(){
-    addressBookArr.push(createContact());
+    let newContact = createContact();
+    addressBookArr.push(newContact);
 }
 addContact();
 console.log(addressBookArr);
@@ -114,8 +110,8 @@ console.log(addressBookArr);
 function editContact(personName){
     addressBookArr.forEach(contact => {
         if((contact._firstName+" " + contact._lastName) == (personName)){
-            let choice = console.log("1.Add new phone 2.Add new email 3.Exit ");
-            switch(choice){
+            let choice = prompt("1.Add new phone 2.Add new email 3.Exit ");
+            switch(parseInt(choice)){
                 case 1 :
                     var phoneNumber = prompt("Enter the phone no: ");
                     contact._phone = phoneNumber;
@@ -127,7 +123,7 @@ function editContact(personName){
                 case 3 :
                     return;
             }
-
+            
         }
     });
 }
@@ -149,3 +145,9 @@ function deleteContact(personName){
 let deleteName = prompt("Enter the person name to delete");
 deleteContact(deleteName);
 console.log(addressBookArr);
+
+//Usecase6:
+function countContacts(){
+    return addressBookArr.length;
+}
+console.log(countContacts());
