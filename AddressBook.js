@@ -101,7 +101,11 @@ function createContact(){
 let addressBookArr = new Array();
 function addContact(){
     let newContact = createContact();
-    addressBookArr.push(newContact);
+      if(checkDuplicate(newContact)){
+        console.log("Contact already exist");
+    }else{
+        addressBookArr.push(newContact); 
+    }
 }
 addContact();
 console.log(addressBookArr);
@@ -151,3 +155,14 @@ function countContacts(){
     return addressBookArr.length;
 }
 console.log(countContacts());
+
+
+//Usecase7:
+function checkDuplicate(newContact){
+    addressBookArr.forEach(contact => {
+        if((contact.firstName + " " + contact.lastName) == (newContact.firstName + " " + newContact.lastName)){
+            return true;
+        }
+    });
+    return false;
+}
