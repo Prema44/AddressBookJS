@@ -194,3 +194,18 @@ function viewPersonsByState(state){
 }
 let viewByState = viewPersonsByState(prompt("Enter state name"));
 console.log("Persons in " + state + "are: " + viewByState);
+
+//Usecase10:
+function countByCity(city){
+    let list = viewPersonsByCity(city);
+    return list.length;
+}
+function countByState(state){
+    let list = viewPersonsByState(state);
+    return list.length;
+}
+var cityName = prompt("Enter the city name to find count: ");
+console.log("The number of contacts in "+cityName+" is: "+countByCity(cityName));
+var stateName = prompt("Enter the state name to find count: ");
+console.log("The number of contacts in "+stateName+" is: "+countByState(stateName));
+
