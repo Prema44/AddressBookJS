@@ -1,3 +1,4 @@
+
 //Usecase1,Usecase2:
 var prompt = require('prompt-sync')();
 let nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
